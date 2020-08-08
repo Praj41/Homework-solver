@@ -6,6 +6,7 @@
 #include <iostream>
 #include <bitset>
 #include <cmath>
+#include <algorithm>
 #define BITS 32
 
 class BinaryNum {
