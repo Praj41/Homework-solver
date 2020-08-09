@@ -18,8 +18,10 @@ public:
     BinaryNum(int , int);
     void print(const std::string& step = "Start");
     bool add();
-    void shift();
+    void shiftR();
+    void shiftL();
     bool sub();
     void multiply();
     void multiplyBooth();
+    void divideRestore();
 };

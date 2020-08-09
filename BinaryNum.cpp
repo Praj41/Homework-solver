@@ -26,10 +26,16 @@ bool BinaryNum::sub() {
     return A[bits];
 }
 
-void BinaryNum::shift() {
+void BinaryNum::shiftR() {
     Q >>= 1;
     Q[bits-1] = A[0];
     A >>= 1;
+}
+
+void BinaryNum::shiftL() {
+    Q <<= 1;
+    A <<= 1;
+    A[0] = Q[bits];
 }
 
 BinaryNum::BinaryNum(int first,int second) {
@@ -55,7 +61,7 @@ void BinaryNum::multiply() {
             print("Add");
             std::cout << std::endl;
         }
-        shift();
+        shiftR();
         carry = 0;
         std::cout << "C = " << carry << "   ";
         print("Shift");
@@ -72,7 +78,7 @@ void BinaryNum::multiplyBooth() {
             print("A<-A-M");
             std::cout << "   Q-1 = " << q << std::endl;
             q = Q[0];
-            shift();
+            shiftR();
             print("Shift");
             std::cout << "   Q-1 = " << q << std::endl << std::endl;
         } else if (Q[0] == 0 && q) {
@@ -80,14 +86,38 @@ void BinaryNum::multiplyBooth() {
             print("A<-A+M");
             std::cout << "   Q-1 = " << q << std::endl;
             q = Q[0];
-            shift();
+            shiftR();
             print("Shift");
             std::cout << "   Q-1 = " << q << std::endl << std::endl;
         } else {
             q = Q[0];
-            shift();
+            shiftR();
             print("Shift");
             std::cout << "   Q-1 = " << q << std::endl << std::endl;
+        }
+    }
+}
+
+void BinaryNum::divideRestore() {
+    for (int i = 0; i < bits; ++i) {
+        shiftL();
+        std::cout << "C = " << A[bits] << "   ";
+        print("Shift");
+        std::cout << std::endl;
+        sub();
+        if (A[bits] == 1) {
+            std::cout << "C = " << A[bits] << "   ";
+            print("A<-A-M");
+            std::cout << "   Q-0 = " << Q[0] << std::endl << std::endl;
+            add();
+            std::cout << "C = " << A[bits] << "   ";
+            print("Restore");
+            std::cout << std::endl << std::endl;
+        } else {
+            Q[0] = 1;
+            std::cout << "C = " << A[bits] << "   ";
+            print("A<-A-M");
+            std::cout <<  "   Q-0 = " << Q[0] << std::endl << std::endl;
         }
     }
 }
