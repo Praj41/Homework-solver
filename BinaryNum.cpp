@@ -20,6 +20,12 @@ bool BinaryNum::add() {
     return A[bits];
 }
 
+bool BinaryNum::sub() {
+    std::bitset<BITS> temp1(A.to_ulong()-M.to_ulong());
+    A = temp1;
+    return A[bits];
+}
+
 void BinaryNum::shift() {
     Q >>= 1;
     Q[bits-1] = A[0];
@@ -37,7 +43,7 @@ BinaryNum::BinaryNum(int first,int second) {
 }
 
 void BinaryNum::print(const std::string& step) {
-    std::cout << "A = " << getNBits(A) << "   Q = " << getNBits(Q) << "   M = " << getNBits(M) << "   " << step << std::endl;
+    std::cout << "A = " << getNBits(A) << "   Q = " << getNBits(Q) << "   M = " << getNBits(M) << "   " << step;
 }
 
 void BinaryNum::multiply() {
@@ -47,11 +53,41 @@ void BinaryNum::multiply() {
             carry = add();
             std::cout << "C = " << carry << "   ";
             print("Add");
+            std::cout << std::endl;
         }
         shift();
         carry = 0;
         std::cout << "C = " << carry << "   ";
         print("Shift");
-        std::cout << std::endl;
+        std::cout << std::endl << std::endl;
+    }
+}
+
+void BinaryNum::multiplyBooth() {
+    bits++;
+    bool q = false;
+    for (int i = 0; i < bits; ++i) {
+        if(Q[0] == 1 && !q) {
+            sub();
+            print("A<-A-M");
+            std::cout << "   Q-1 = " << q << std::endl;
+            q = Q[0];
+            shift();
+            print("Shift");
+            std::cout << "   Q-1 = " << q << std::endl << std::endl;
+        } else if (Q[0] == 0 && q) {
+            add();
+            print("A<-A+M");
+            std::cout << "   Q-1 = " << q << std::endl;
+            q = Q[0];
+            shift();
+            print("Shift");
+            std::cout << "   Q-1 = " << q << std::endl << std::endl;
+        } else {
+            q = Q[0];
+            shift();
+            print("Shift");
+            std::cout << "   Q-1 = " << q << std::endl << std::endl;
+        }
     }
 }

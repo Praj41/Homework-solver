@@ -7,7 +7,7 @@
 #include <bitset>
 #include <cmath>
 #include <algorithm>
-#define BITS 32
+#define BITS 64
 
 class BinaryNum {
     int bits;
@@ -17,7 +17,9 @@ class BinaryNum {
 public:
     BinaryNum(int , int);
     void print(const std::string& step = "Start");
-    void multiply();
     bool add();
     void shift();
+    bool sub();
+    void multiply();
+    void multiplyBooth();
 };
