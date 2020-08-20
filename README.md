@@ -1,6 +1,6 @@
 # Homework-solver
 ## does the following:
-### Booth's multiplication, 
+### Booth's multiplication(Does not work for a negative Multiplicand yet), 
 ### unsigned multiplication, 
 ### Restoring Division
 
