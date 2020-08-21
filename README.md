@@ -9,3 +9,5 @@
 ### The windows and linux executables are in [executables](https://github.com/Praj41/Homework-solver/tree/master/cmake-build-debug)
 
 ## The [Release v0.75](https://github.com/Praj41/Homework-solver/releases/tag/0.75)
+
+##### found a better [one](http://www.ecs.umass.edu/ece/koren/arith/simulator/).
